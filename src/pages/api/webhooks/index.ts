@@ -16,7 +16,7 @@ export const config = {
 };
 
 // const webhookSecret: string = "whsec_p3vTgJSDGc6KjOF40GBhWG36d7nNINxk";
-const webhookSecret: string = "whsec_p3vTgJSDGc6KjOF40GBhWG36d7nNINxk";
+const webhookSecret: string = "whsec_sTLaaDJnU2GWLWwfGTm2vh56qVG4iAQ1";
 
 const cors = Cors({
   allowMethods: ["POST", "HEAD"],

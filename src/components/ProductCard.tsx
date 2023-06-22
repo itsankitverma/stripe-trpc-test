@@ -30,9 +30,11 @@ const ProductCard = () => {
 
   const handleOnAddToCart = async (event: any) => {
     event.preventDefault();
+    let email = "test@gmail.com";
 
     const response = await fetchPostJSON("/api/checkout_sessions", {
-      client_reference_id: sessionData?.user.email,
+      client_reference_id: "12312312312333",
+      ...{ email },
     });
 
     if (response.statusCode === 500) {

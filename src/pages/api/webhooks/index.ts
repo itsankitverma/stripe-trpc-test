@@ -82,7 +82,7 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       );
 
       console.log(`event.type :>> event: ${event.type}`);
-      users.doc(session.client_reference_id).set({
+      users.doc("session.client_reference_id").set({
         stripePeriodEnd: periodEndDate,
         stripePeriodStart: periodStartDate,
         stripeCustomerId: session.customer,

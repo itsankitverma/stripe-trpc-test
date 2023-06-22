@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import { NextApiRequest, NextApiResponse } from "next";
 
 const stripe = new Stripe(
   "sk_test_51NAdoFSHuHuSftrQxoIY88VZgLJDWTsA37apV8XsHxoDCOFJmcGmQgCqWEJXJrQAq5NcRzIiUzBJuNN2DbKeSXZ500BIsKEigF",
@@ -7,7 +8,10 @@ const stripe = new Stripe(
   }
 );
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method === "POST") {
     try {
       const session = await stripe.checkout.sessions.create({
@@ -25,7 +29,9 @@ export default async function handler(req, res) {
 
       res.status(200).json(session);
     } catch (err) {
-      res.status(500).json({ statusCode: 500, message: err.message });
+      const errorMessage = err instanceof Error ? err.message : "Unknown error";
+      res.status(400).send(`Webhook Error: ${errorMessage}`);
+      res.status(500).json({ statusCode: 500, message: errorMessage });
     }
   } else {
     res.setHeader("Allow", "POST");

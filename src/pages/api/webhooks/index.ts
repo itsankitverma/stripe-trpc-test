@@ -3,9 +3,9 @@ import { buffer } from "micro";
 import Cors from "micro-cors";
 import { NextApiRequest, NextApiResponse } from "next";
 import Stripe from "stripe";
-import admin from "../../../server/api/firebaseAdmin"
+import admin from "../../../server/api/firebaseAdmin";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
   apiVersion: "2022-11-15",
 });
 
@@ -87,7 +87,6 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         stripePeriodStart: periodStartDate,
         stripeCustomerId: session.customer,
         stripeSubscriptionId: session.subscription,
-        stripePriceId: subscription.items.data[0].price.id,
         stripeMembershipStatus: daysDifference - 1 > 0 ? "Active" : "Inactive",
       });
     }
